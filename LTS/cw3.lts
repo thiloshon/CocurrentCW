@@ -1,0 +1,29 @@
+// CONSTANTS
+const MAXPAPER = 3
+
+
+// PRINTER FSM
+PRINTER (N = MAXPAPER) = PRINT[N],
+PRINT[ i : 0..MAXPAPER ] = ( 
+	when( i > 0)  student.acquire -> student.release -> PRINT[i-1]
+	| 
+	when( i == 0 ) technician.acquire -> technician.release ->  PRINT[3]
+) .
+
+
+// STUDENT FSM
+STUDENT (N = 1) = PRINT[N],
+PRINT[ i : 0..N ] = ( 
+	when( i > 0)  student.acquire -> print[i] -> student.release -> PRINT[i-1]	
+) .
+
+
+// TECHNICIAN FSM
+TECHNICIAN = (technician.acquire -> fix -> technician.release -> TECHNICIAN).
+
+
+// PRINT COMPOSITE FSM
+|| PRINTJOB = (a:STUDENT(3) ||b:STUDENT(2) || {a,b}::PRINTER(3) || TECHNICIAN) / { technician.acquire/a.technician.acquire, technician.release/a.technician.release, technician.acquire/b.technician.acquire, technician.release/b.technician.release} .
+
+
+
