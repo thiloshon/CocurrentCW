@@ -1,28 +1,31 @@
 /**
  * Created by Thiloshon on 25-Nov-18.
  */
-public class Student {
+public class Student extends Thread{
     // thread group he/she is in;
     private ThreadGroup threadGroup;
 
     // his/her printer;
-    private Printer printer;
+    private LaserPrinter printer;
 
     // his/her name
     private String studentName;
 
-    public Student(String studentName, Printer printer, ThreadGroup threadGroup) {
+    public Student(String studentName, LaserPrinter printer, ThreadGroup threadGroup) {
+        super(threadGroup, "Thread:" + studentName);
+
         this.printer = printer;
         this.studentName = studentName;
         this.threadGroup = threadGroup;
     }
 
-    void printDocument(){
+    @Override
+    public void run() {
         Document CWK1 = new Document( studentName, "cwk1", 20 );
         printer.printDocument( CWK1 ) ;
 
         try {
-            Thread.sleep( (int)( Math.random() * 1000 ) ) ;
+            sleep( (int)( Math.random() * 1000 ) ) ;
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
@@ -35,7 +38,7 @@ public class Student {
         printer.printDocument( CWK2 ) ;
 
         try {
-            Thread.sleep( (int)( Math.random() * 1000 ) ) ;
+            sleep( (int)( Math.random() * 1000 ) ) ;
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
@@ -48,7 +51,7 @@ public class Student {
         printer.printDocument( CWK3 ) ;
 
         try {
-            Thread.sleep( (int)( Math.random() * 1000 ) ) ;
+            sleep( (int)( Math.random() * 1000 ) ) ;
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
@@ -61,7 +64,7 @@ public class Student {
         printer.printDocument( CWK4 ) ;
 
         try {
-            Thread.sleep( (int)( Math.random() * 1000 ) ) ;
+            sleep( (int)( Math.random() * 1000 ) ) ;
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
@@ -74,14 +77,15 @@ public class Student {
         printer.printDocument( CWK5 ) ;
 
         try {
-            Thread.sleep( (int)( Math.random() * 1000 ) ) ;
+            sleep( (int)( Math.random() * 1000 ) ) ;
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
 
         System.out.println("Successfully printed " + CWK5.getDocumentName());
 
-
     }
+
+
 
 }

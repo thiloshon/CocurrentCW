@@ -49,7 +49,8 @@ public class LaserPrinter implements ServicePrinter {
         int documentPages = document.getNumberOfPages();
 
         if (paperLevel >= documentPages && tonerLevel >= documentPages){
-            // TODO: can print
+            System.out.println("PRINTING" +  document.getDocumentName() +"...");
+            System.out.println("PRINTED...");
 
 
         } else {
