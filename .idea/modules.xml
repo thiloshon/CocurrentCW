@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/CocurrentCW.iml" filepath="$PROJECT_DIR$/CocurrentCW.iml" />
+      <module fileurl="file://$PROJECT_DIR$/KaoskiPrintingSolutions/KaoskiPrintingSolutions.iml" filepath="$PROJECT_DIR$/KaoskiPrintingSolutions/KaoskiPrintingSolutions.iml" />
     </modules>
   </component>
 </project>

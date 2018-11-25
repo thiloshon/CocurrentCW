@@ -14,7 +14,7 @@ public interface ServicePrinter extends Printer
     // from Printer:
     //    public void printDocument( Document document ) ;
 
-    // Printer constants 
+    // Printer constants
 
     public final int Full_Paper_Tray  = 250 ;
     public final int Full_Toner_Level = 500 ;
@@ -28,9 +28,9 @@ public interface ServicePrinter extends Printer
 
     // Technician methods
 
-    public void replaceTonerCartridge( ) ;
+    public void replaceTonerCartridge() ;
 
-    public void refillPaper( ) ;
+    public void refillPaper() ;
     
 } // ServicePrinter
 
