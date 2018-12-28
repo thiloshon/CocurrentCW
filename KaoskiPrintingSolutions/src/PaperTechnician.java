@@ -22,10 +22,13 @@ public class PaperTechnician extends Thread{
 
     @Override
     public void run() {
-        printer.refillPaper();
-        printer.refillPaper();
-        printer.refillPaper();
-
-
+        while (true){
+            printer.refillPaper();
+            try {
+                sleep(1000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
     }
 }

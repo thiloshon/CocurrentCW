@@ -25,7 +25,7 @@ public class PrintingSystem {
         student3.start();
         student4.start();
 
-        System.out.println(hpInkJet3200.toString());
+
 
         // Thread myThread = new Thread( myThreadGroup, "Thread_A_1") ;');
     }

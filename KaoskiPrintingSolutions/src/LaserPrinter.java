@@ -45,13 +45,16 @@ public class LaserPrinter implements ServicePrinter {
      * @param document
      */
     @Override
-    public void printDocument(Document document) {
+    public synchronized void printDocument(Document document) {
         int documentPages = document.getNumberOfPages();
 
         if (paperLevel >= documentPages && tonerLevel >= documentPages){
-            System.out.println("PRINTING" +  document.getDocumentName() +"...");
+            System.out.println("PRINTING " + document.getUserID() + "'s" +  document.getDocumentName() + " of pages " + document.getNumberOfPages() +"...");
+            paperLevel-=documentPages;
+            tonerLevel-=documentPages;
             System.out.println("PRINTED...");
 
+            System.out.println(toString());
 
         } else {
             // can't print, wait for refill
@@ -61,14 +64,16 @@ public class LaserPrinter implements ServicePrinter {
                 e.printStackTrace();
             }
         }
-
+        notifyAll() ;
     }
 
     @Override
-    public void replaceTonerCartridge() {
+    public synchronized void replaceTonerCartridge() {
         if (tonerLevel < TONER_REPLACE_VAL){
             // toner replace
             tonerLevel += MAX_TONER;
+            System.out.println("Replacing Toner");
+            System.out.println(toString());
         } else {
             // toner wastage
             try {
@@ -77,11 +82,11 @@ public class LaserPrinter implements ServicePrinter {
                 e.printStackTrace();
             }
         }
-
+        notifyAll() ;
     }
 
     @Override
-    public void refillPaper() {
+    public synchronized void refillPaper() {
         if (paperLevel + PAPER_PER_PACK > MAX_PAPERS){
             // paper overfill
             try {
@@ -93,13 +98,15 @@ public class LaserPrinter implements ServicePrinter {
         } else {
             // refill
             paperLevel+=PAPER_PER_PACK;
+            System.out.println("Replacing Paper");
+            System.out.println(toString());
 
         }
-
+        notifyAll() ;
     }
 
     @Override
-    public String toString() {
+    public synchronized String toString() {
         return "LaserPrinter{" +
                 "printerName='" + printerName + '\'' +
                 ", printerID='" + printerID + '\'' +

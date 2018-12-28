@@ -14,16 +14,18 @@ PRINT[ i : 0..MAXPAPER ] = (
 // STUDENT FSM
 STUDENT (N = 1) = PRINT[N],
 PRINT[ i : 0..N ] = ( 
-	when( i > 0)  student.acquire -> print[i] -> student.release -> PRINT[i-1]	
+	when( i > 0)  student.acquire -> print[N-i+1] -> student.release -> PRINT[i-1]
+	|
+	when( i == 0) finish -> END	
 ) .
 
 
 // TECHNICIAN FSM
-TECHNICIAN = (technician.acquire -> fix -> technician.release -> TECHNICIAN).
+TECHNICIAN = (technician.acquire -> refill.paper -> technician.release -> TECHNICIAN).
 
 
 // PRINT COMPOSITE FSM
-|| PRINTJOB = (a:STUDENT(3) ||b:STUDENT(2) || {a,b}::PRINTER(3) || TECHNICIAN) / { technician / { a.technician, b.technician} } .
+|| PRINTJOB = (a:STUDENT(3) ||b:STUDENT(2) || {a,b}::PRINTER(3) || TECHNICIAN) / { technician / { a.technician, b.technician},  finish / { a.finish, b.finish}} .
 
 
 

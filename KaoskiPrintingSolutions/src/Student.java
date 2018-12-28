@@ -30,11 +30,11 @@ public class Student extends Thread{
             e.printStackTrace();
         }
 
-        System.out.println("Successfully printed " + CWK1.getDocumentName());
 
 
 
-        Document CWK2 = new Document( studentName, "cwk2", 20 );
+
+        Document CWK2 = new Document( studentName, "cwk2", 42 );
         printer.printDocument( CWK2 ) ;
 
         try {
@@ -43,11 +43,11 @@ public class Student extends Thread{
             e.printStackTrace();
         }
 
-        System.out.println("Successfully printed " + CWK2.getDocumentName());
 
 
 
-        Document CWK3 = new Document( studentName, "cwk3", 20 );
+
+        Document CWK3 = new Document( studentName, "cwk3", 18 );
         printer.printDocument( CWK3 ) ;
 
         try {
@@ -56,11 +56,10 @@ public class Student extends Thread{
             e.printStackTrace();
         }
 
-        System.out.println("Successfully printed " + CWK3.getDocumentName());
 
 
 
-        Document CWK4 = new Document( studentName, "cwk4", 20 );
+        Document CWK4 = new Document( studentName, "cwk4", 98 );
         printer.printDocument( CWK4 ) ;
 
         try {
@@ -69,11 +68,10 @@ public class Student extends Thread{
             e.printStackTrace();
         }
 
-        System.out.println("Successfully printed " + CWK4.getDocumentName());
 
 
 
-        Document CWK5 = new Document( studentName, "cwk5", 20 );
+        Document CWK5 = new Document( studentName, "cwk5", 116 );
         printer.printDocument( CWK5 ) ;
 
         try {
@@ -82,7 +80,6 @@ public class Student extends Thread{
             e.printStackTrace();
         }
 
-        System.out.println("Successfully printed " + CWK5.getDocumentName());
 
     }
 
