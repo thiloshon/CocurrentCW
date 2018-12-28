@@ -69,7 +69,7 @@ public class LaserPrinter implements ServicePrinter {
                   displayMessage(7, 0);
                  break;
                  }
-               
+
 
             } catch (InterruptedException ex) {
                   System.out.println(ex.toString());
@@ -90,6 +90,7 @@ public class LaserPrinter implements ServicePrinter {
 
         
         displayMessage(0, 0);
+        System.out.println("page Count: " + document.getNumberOfPages());
 
         // wait until there is enough of resources to print
         while (this.currentPapers < document.getNumberOfPages() || this.currentToner < document.getNumberOfPages()) {

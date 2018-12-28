@@ -1,7 +1,7 @@
 /**
  * Created by Thiloshon on 25-Nov-18.
  */
-public class Student extends Thread{
+public class Student extends Thread {
     // thread group he/she is in;
     private ThreadGroup threadGroup;
 
@@ -21,68 +21,18 @@ public class Student extends Thread{
 
     @Override
     public void run() {
-        Document CWK1 = new Document( studentName, "cwk1", 20 );
-        printer.printDocument( CWK1 ) ;
 
-        try {
-            sleep( (int)( Math.random() * 1000 ) ) ;
-        } catch (InterruptedException e) {
-            e.printStackTrace();
+        for (int i = 0; i < 5 ; i ++){
+            Document CWK = new Document(studentName, "cwk" + i, (int) (Math.random() * 25));
+            printer.printDocument(CWK);
+
+            try {
+                sleep((int) (Math.random() * 1000));
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
         }
-
-
-
-
-
-        Document CWK2 = new Document( studentName, "cwk2", 42 );
-        printer.printDocument( CWK2 ) ;
-
-        try {
-            sleep( (int)( Math.random() * 1000 ) ) ;
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-
-
-
-
-
-        Document CWK3 = new Document( studentName, "cwk3", 18 );
-        printer.printDocument( CWK3 ) ;
-
-        try {
-            sleep( (int)( Math.random() * 1000 ) ) ;
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-
-
-
-
-        Document CWK4 = new Document( studentName, "cwk4", 98 );
-        printer.printDocument( CWK4 ) ;
-
-        try {
-            sleep( (int)( Math.random() * 1000 ) ) ;
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-
-
-
-
-        Document CWK5 = new Document( studentName, "cwk5", 116 );
-        printer.printDocument( CWK5 ) ;
-
-        try {
-            sleep( (int)( Math.random() * 1000 ) ) ;
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-
 
     }
-
-
 
 }

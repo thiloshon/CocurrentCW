@@ -22,16 +22,14 @@ public class TonerTechnician extends Thread{
 
     @Override
     public void run() {
-        while (true){
+        for (int i = 0; i < 3; i++) {
             printer.replaceTonerCartridge();
             try {
-                sleep(1000);
+                sleep(Utilities.timeRandomizer());
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
         }
-
-        // TODO
 
     }
     
