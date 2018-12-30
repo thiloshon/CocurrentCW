@@ -121,7 +121,7 @@ public class LaserPrinter implements ServicePrinter {
      private boolean checkStudentAvailability() {
          if(students.activeCount()>0){
              return true;
-         } 
+         }
          else{
              return false;
          }

@@ -28,7 +28,6 @@ class Utilities {
 
 
     static int timeRandomizer() {
-
         int seconds = (int) (Math.random() * 1000);
 
         System.out.println("TIMES: " + seconds);
