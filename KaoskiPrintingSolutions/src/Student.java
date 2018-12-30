@@ -1,7 +1,12 @@
-import java.util.concurrent.Semaphore;
-
 /**
- * Created by Thiloshon on 25-Nov-18.
+ * *************************************************************
+ * File:	  PaperTechnician.java (Class)
+ * Author:	  Thiloshon
+ * Contents:  6SENG002W CWK
+ * This provides the thread behaviour of students.
+ * Date:	  25-Nov-18
+ * Version:	  1.0
+ * *************************************************************
  */
 public class Student extends Thread {
 
@@ -11,12 +16,9 @@ public class Student extends Thread {
     // his/her name
     private String studentName;
 
-    private Semaphore semaphore;
-
-    Student(String studentName, LaserPrinter printer, ThreadGroup threadGroup, Semaphore semaphore) {
+    Student(String studentName, LaserPrinter printer, ThreadGroup threadGroup) {
         super(threadGroup, "Thread:" + studentName);
 
-        this.semaphore = semaphore;
         this.printer = printer;
         this.studentName = studentName;
     }
@@ -24,29 +26,7 @@ public class Student extends Thread {
     @Override
     public void run() {
 
-        try { // TODO : SEMAPHORE CODE
-            semaphore.acquire();
-            try{
-                for (int i = 0; i < 5 ; i ++){
-                    Document CWK = new Document(studentName, "cwk" + i, (int) (Math.random() * 250));
-                    printer.printDocument(CWK);
-
-                    try {
-                        sleep(Utilities.timeRandomizer()); // Sleeping for random time
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
-                }
-            } finally {
-                semaphore.release();
-            }
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-
-
-
-        /*for (int i = 0; i < 5 ; i ++){
+        for (int i = 0; i < 5; i++) {
             Document CWK = new Document(studentName, "cwk" + i, (int) (Math.random() * 25));
             printer.printDocument(CWK);
 
@@ -55,7 +35,7 @@ public class Student extends Thread {
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-        }*/
+        }
 
     }
 

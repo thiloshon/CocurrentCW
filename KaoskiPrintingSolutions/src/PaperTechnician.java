@@ -1,54 +1,41 @@
-import java.util.concurrent.Semaphore;
-
 /**
- * Created by Thiloshon on 25-Nov-18.
+ * *************************************************************
+ * File:	  PaperTechnician.java (Class)
+ * Author:	  Thiloshon
+ * Contents:  6SENG002W CWK
+ * This provides the functions of paper technician.
+ * Date:	  25-Nov-18
+ * Version:	  1.0
+ * *************************************************************
  */
 public class PaperTechnician extends Thread {
+    // thread group he/she is in;
+    //private ThreadGroup threadGroup;
 
     // his/her printer;
     private LaserPrinter printer;
-    private Semaphore semaphore; // TODO : SEMAPHORE CODE
 
+    // his/her name
+    //private String technicianName;
 
-
-    PaperTechnician(String technicianName, LaserPrinter printer, ThreadGroup threadGroup, Semaphore semaphore) {
+    PaperTechnician(String technicianName, LaserPrinter printer, ThreadGroup threadGroup) {
         super(threadGroup, "Thread:" + technicianName);
 
-        this.semaphore = semaphore; // TODO : SEMAPHORE CODE
-
+        //this.threadGroup = threadGroup;
         this.printer = printer;
+        //this.technicianName = technicianName;
     }
 
 
     @Override
     public void run() {
-
-        try { // TODO : SEMAPHORE CODE
-            semaphore.acquire();
-            try{
-                for (int i = 0; i < 3; i++) {
-                    printer.refillPaper();
-                    try {
-                        sleep(Utilities.timeRandomizer()); // Sleeping for random time
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
-                }
-            } finally {
-                semaphore.release();
-            }
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-
-
-        /*for (int i = 0; i < 3; i++) {
+        for (int i = 0; i < 3; i++) {
             printer.refillPaper();
             try {
                 sleep(Utilities.timeRandomizer()); // Sleeping for random time
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-        }*/
+        }
     }
 }
