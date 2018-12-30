@@ -139,7 +139,7 @@ public class LaserPrinter implements ServicePrinter {
         notifyAll();
     }
 
-    private void message(String msg){
+    private void message(String msg) {
         System.out.println(msg);
     }
 

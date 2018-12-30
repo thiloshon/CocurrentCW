@@ -1,5 +1,12 @@
 /**
- * Created by Thiloshon on 25-Nov-18.
+ * *************************************************************
+ * File:	  PaperTechnician.java (Class)
+ * Author:	  Thiloshon
+ * Contents:  6SENG002W CWK
+ * This provides the functions of paper technician.
+ * Date:	  25-Nov-18
+ * Version:	  1.0
+ * *************************************************************
  */
 public class PaperTechnician extends Thread {
     // thread group he/she is in;
@@ -11,7 +18,7 @@ public class PaperTechnician extends Thread {
     // his/her name
     //private String technicianName;
 
-    public PaperTechnician(String technicianName, LaserPrinter printer, ThreadGroup threadGroup) {
+    PaperTechnician(String technicianName, LaserPrinter printer, ThreadGroup threadGroup) {
         super(threadGroup, "Thread:" + technicianName);
 
         //this.threadGroup = threadGroup;

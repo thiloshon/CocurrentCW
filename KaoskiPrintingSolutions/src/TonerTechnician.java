@@ -1,22 +1,22 @@
 /**
- * Created by Thiloshon on 25-Nov-18.
+ * *************************************************************
+ * File:	  PaperTechnician.java (Class)
+ * Author:	  Thiloshon
+ * Contents:  6SENG002W CWK
+ * This provides the functions of toner technician.
+ * Date:	  25-Nov-18
+ * Version:	  1.0
+ * *************************************************************
  */
-public class TonerTechnician extends Thread{
-    // thread group he/she is in;
-    private ThreadGroup threadGroup;
+public class TonerTechnician extends Thread {
 
     // his/her printer;
     private LaserPrinter printer;
 
-    // his/her name
-    private String technicianName;
-
-    public TonerTechnician(String technicianName, LaserPrinter printer, ThreadGroup threadGroup) {
+    TonerTechnician(String technicianName, LaserPrinter printer, ThreadGroup threadGroup) {
         super(threadGroup, "Thread:" + technicianName);
 
-        this.threadGroup = threadGroup;
         this.printer = printer;
-        this.technicianName = technicianName;
     }
 
 
@@ -32,5 +32,5 @@ public class TonerTechnician extends Thread{
         }
 
     }
-    
+
 }
