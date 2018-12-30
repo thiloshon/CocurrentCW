@@ -10,6 +10,7 @@
  */
 class Utilities {
 
+    // Alert messages
     final static String PRINTING_REQUEST_RECEIVED = "--- PRINTING_REQUEST_RECEIVED ---";
     final static String WAITING_FOR_PRINTING_RESOURCES = "--- WAITING_FOR_PRINTING_RESOURCES ---";
     final static String PRINTING_DOC_DONE = "--- PRINTING_DOC_DONE ---";
