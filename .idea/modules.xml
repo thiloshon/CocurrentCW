@@ -4,6 +4,7 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/CocurrentCW.iml" filepath="$PROJECT_DIR$/CocurrentCW.iml" />
       <module fileurl="file://$PROJECT_DIR$/KaoskiPrintingSolutions/KaoskiPrintingSolutions.iml" filepath="$PROJECT_DIR$/KaoskiPrintingSolutions/KaoskiPrintingSolutions.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Playground/Playground.iml" filepath="$PROJECT_DIR$/Playground/Playground.iml" />
     </modules>
   </component>
 </project>

@@ -1,35 +1,52 @@
+import java.util.concurrent.Semaphore;
+
 /**
  * Created by Thiloshon on 25-Nov-18.
  */
 public class TonerTechnician extends Thread{
-    // thread group he/she is in;
-    private ThreadGroup threadGroup;
 
     // his/her printer;
     private LaserPrinter printer;
 
-    // his/her name
-    private String technicianName;
+    private Semaphore semaphore;
 
-    public TonerTechnician(String technicianName, LaserPrinter printer, ThreadGroup threadGroup) {
+    TonerTechnician(String technicianName, LaserPrinter printer, ThreadGroup threadGroup, Semaphore semaphore) {
         super(threadGroup, "Thread:" + technicianName);
 
-        this.threadGroup = threadGroup;
+        this.semaphore = semaphore;
         this.printer = printer;
-        this.technicianName = technicianName;
     }
 
 
     @Override
     public void run() {
-        for (int i = 0; i < 3; i++) {
+        try { // TODO : SEMAPHORE CODE
+            semaphore.acquire();
+            try{
+                for (int i = 0; i < 3; i++) {
+                    printer.replaceTonerCartridge();
+                    try {
+                        sleep(Utilities.timeRandomizer()); // Sleeping for random time
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                }
+            } finally {
+                semaphore.release();
+            }
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+
+       /* for (int i = 0; i < 3; i++) {
             printer.replaceTonerCartridge();
             try {
                 sleep(Utilities.timeRandomizer());
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-        }
+        }*/
 
     }
     

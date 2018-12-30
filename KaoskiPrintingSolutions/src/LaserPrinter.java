@@ -45,7 +45,7 @@ public class LaserPrinter implements ServicePrinter {
      * @param document
      */
     @Override
-    public synchronized void printDocument(Document document) {
+    public void printDocument(Document document) {
         message(Utilities.PRINTING_REQUEST_RECEIVED);
 
         int documentPages = document.getNumberOfPages();
@@ -76,7 +76,7 @@ public class LaserPrinter implements ServicePrinter {
     }
 
     @Override
-    public synchronized void replaceTonerCartridge() {
+    public void replaceTonerCartridge() {
         message(Utilities.TONER_REPLACE_REQUEST_RECEIVED);
         while (tonerLevel > ServicePrinter.Minimum_Toner_Level) { // can cause deadlock, issue in the logic
             try {
@@ -107,7 +107,7 @@ public class LaserPrinter implements ServicePrinter {
     }
 
     @Override
-    public synchronized void refillPaper() {
+    public void refillPaper() {
         message(Utilities.PAPER_REPLACE_REQUEST_RECEIVED);
         while (paperLevel + ServicePrinter.SheetsPerPack > ServicePrinter.Full_Paper_Tray) {
             // paper overfill
