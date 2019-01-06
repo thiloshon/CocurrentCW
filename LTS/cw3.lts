@@ -2,6 +2,9 @@
 const MAX_PAPER = 3
 range PAPER_RANGE = 0 .. MAX_PAPER
 
+set PRINTER_ACTIONS = {student.acquire , student.print.paper , student.release, technician.acquire , technician.refill , technician.release }
+set Students = {a, b}
+
 
 // PRINTER FSM
 PRINTER (N = MAX_PAPER) = PRINT[N],
@@ -9,27 +12,26 @@ PRINT[ papercount : PAPER_RANGE ] = (
 	when( papercount > 0)  student.acquire -> student.print.paper -> student.release -> PRINT[ papercount - 1 ]
 	| 
 	when( papercount == 0 ) technician.acquire -> technician.refill -> technician.release ->  PRINT[3]
-)  .
+| waiting -> WAIT ),  
+WAIT = (waiting -> WAIT).
 
 
 // STUDENT FSM
 STUDENT (N = 1) = PRINT[N],
 PRINT[ doc : 0..N ] = ( 
 	when( doc > 0)  student.acquire -> print.doc[doc] -> student.release -> PRINT[doc-1] 
-	|
-	when( doc == 0) waiting -> WAIT	
-) ,
-WAIT = (waiting -> WAIT) .
+) + PRINTER_ACTIONS.
 
 
 // TECHNICIAN FSM
-TECHNICIAN = (technician.acquire -> technician.refill -> technician.release -> TECHNICIAN).
+TECHNICIAN = (technician.acquire -> technician.refill -> technician.release -> TECHNICIAN) + PRINTER_ACTIONS .
 
 
 // PRINT COMPOSITE FSM
-|| PRINTJOB = (a:STUDENT(3) ||b:STUDENT(2) || t:TECHNICIAN || {a,b}::PRINTER(3) )  / 
-	{ t.technician / { a.technician, b.technician }, 
-	waiting / { a.waiting, b.waiting},  	
-	a.print.doc[1..3] / {a.student.print.paper} , b.print.doc[1..2] / {b.student.print.paper} } .
+|| PRINTJOB = (a:STUDENT(3) ||b:STUDENT(2) || t:TECHNICIAN || {Students, t}::PRINTER(3) )  / 
+	{ 
+		waiting / { a.waiting, b.waiting, t.waiting}, 
+		a.print.doc[1..3] / {a.student.print.paper} , b.print.doc[1..2] / {b.student.print.paper} 
+	} .
 
 
