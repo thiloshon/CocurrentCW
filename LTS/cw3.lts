@@ -1,37 +1,35 @@
 // CONSTANTS
-const MAXPAPER = 3
+const MAX_PAPER = 3
+range PAPER_RANGE = 0 .. MAX_PAPER
 
 
 // PRINTER FSM
-PRINTER (N = MAXPAPER) = PRINT[N],
-PRINT[ i : 0..MAXPAPER ] = ( 
-	when( i > 0)  student.acquire -> student.release -> PRINT[i-1]
+PRINTER (N = MAX_PAPER) = PRINT[N],
+PRINT[ papercount : PAPER_RANGE ] = (
+	when( papercount > 0)  student.acquire -> student.print.paper -> student.release -> PRINT[ papercount - 1 ]
 	| 
-	when( i == 0 ) technician.acquire -> technician.release ->  PRINT[3]
-) .
+	when( papercount == 0 ) technician.acquire -> technician.refill -> technician.release ->  PRINT[3]
+)  .
 
 
 // STUDENT FSM
 STUDENT (N = 1) = PRINT[N],
-PRINT[ i : 0..N ] = ( 
-	when( i > 0)  student.acquire -> print[N-i+1] -> student.release -> PRINT[i-1]
+PRINT[ doc : 0..N ] = ( 
+	when( doc > 0)  student.acquire -> print.doc[doc] -> student.release -> PRINT[doc-1] 
 	|
-	when( i == 0) finish -> END	
-) .
+	when( doc == 0) waiting -> WAIT	
+) ,
+WAIT = (waiting -> WAIT) .
 
 
 // TECHNICIAN FSM
-TECHNICIAN = (technician.acquire -> refill.paper -> technician.release -> TECHNICIAN).
+TECHNICIAN = (technician.acquire -> technician.refill -> technician.release -> TECHNICIAN).
 
 
 // PRINT COMPOSITE FSM
-|| PRINTJOB = (a:STUDENT(3) ||b:STUDENT(2) || {a,b}::PRINTER(3) || TECHNICIAN) / { technician / { a.technician, b.technician},  finish / { a.finish, b.finish}} .
-
-
-
-
-
-// / { technician.acquire/a.technician.acquire, technician.release/a.technician.release, technician.acquire/b.technician.acquire, technician.release/b.technician.release} .
-
+|| PRINTJOB = (a:STUDENT(3) ||b:STUDENT(2) || t:TECHNICIAN || {a,b}::PRINTER(3) )  / 
+	{ t.technician / { a.technician, b.technician }, 
+	waiting / { a.waiting, b.waiting},  	
+	a.print.doc[1..3] / {a.student.print.paper} , b.print.doc[1..2] / {b.student.print.paper} } .
 
 
