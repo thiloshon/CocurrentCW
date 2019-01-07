@@ -29,7 +29,10 @@ public class LaserPrinter implements ServicePrinter {
     private ThreadGroup students;
 
 
-
+    /**
+     * @param printerName
+     * @param printerID
+     */
     LaserPrinter(String printerName, String printerID, ThreadGroup students) {
         this.printerName = printerName;
         this.printerID = printerID;
@@ -38,9 +41,11 @@ public class LaserPrinter implements ServicePrinter {
     }
 
 
-
+    /**
+     * @param document
+     */
     @Override
-    public synchronized void printDocument(Document document) {
+    public void printDocument(Document document) {
         message(Utilities.PRINTING_REQUEST_RECEIVED);
 
         int documentPages = document.getNumberOfPages();
@@ -71,7 +76,7 @@ public class LaserPrinter implements ServicePrinter {
 
 
     @Override
-    public synchronized void replaceTonerCartridge() {
+    public void replaceTonerCartridge() {
         message(Utilities.TONER_REPLACE_REQUEST_RECEIVED);
 
         while (hasEnoughToners()) { // can cause deadlock, issue in the logic
@@ -103,7 +108,7 @@ public class LaserPrinter implements ServicePrinter {
     }
 
     @Override
-    public synchronized void refillPaper() {
+    public void refillPaper() {
         message(Utilities.PAPER_REPLACE_REQUEST_RECEIVED);
 
         while (paperWillOverfill()) {
