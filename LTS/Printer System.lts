@@ -21,11 +21,16 @@ WAIT = (waiting -> WAIT // Comment as required
 STUDENT (N = 1) = PRINT[N],
 PRINT[ doc : 0..N ] = ( 
 	when( doc > 0)  student.acquire -> print.doc[doc] -> student.release -> PRINT[doc-1] 
-) + PRINTER_ACTIONS.
+// |
+//  	when( doc == 0) waiting -> WAIT
+ )
+// ,  WAIT = (waiting -> WAIT)
+ + PRINTER_ACTIONS.
 
 
 // TECHNICIAN FSM
 TECHNICIAN = (technician.acquire -> technician.refill -> technician.release -> TECHNICIAN) + PRINTER_ACTIONS .
+
 
 
 // PRINT COMPOSITE FSM
