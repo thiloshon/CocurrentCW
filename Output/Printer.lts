@@ -12,8 +12,8 @@ PRINT[ papercount : PAPER_RANGE ] = (
 	when( papercount > 0)  student.acquire -> student.print.paper -> student.release -> PRINT[ papercount - 1 ]
 	| 
 	when( papercount == 0 ) technician.acquire -> technician.refill -> technician.release ->  PRINT[3]
-| waiting -> WAIT ),  // Comment as required
-WAIT = (waiting -> WAIT // Comment as required
+//| waiting -> WAIT ),  // Comment as required
+//WAIT = (waiting -> WAIT // Comment as required
 ).
 
 
@@ -21,10 +21,10 @@ WAIT = (waiting -> WAIT // Comment as required
 STUDENT (N = 1) = PRINT[N],
 PRINT[ doc : 0..N ] = ( 
 	when( doc > 0)  student.acquire -> print.doc[doc] -> student.release -> PRINT[doc-1] 
-// | 
-//  	when( doc == 0) waiting -> WAIT	
+ | 
+  	when( doc == 0) waiting -> WAIT	
  ) 
-// ,  WAIT = (waiting -> WAIT) 
+ ,  WAIT = (waiting -> WAIT) 
  + PRINTER_ACTIONS.
 
 
